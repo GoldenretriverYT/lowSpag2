@@ -40,6 +40,5 @@ void setFlag(u8 flag, bool val);
 void setRAMBank(u8 bankIndex);
 
 void initCpu(u8* buffer, u16 bufferSize);
-void runCpu();
 void runInstruction();
 void interrupt(u8 interruptId);

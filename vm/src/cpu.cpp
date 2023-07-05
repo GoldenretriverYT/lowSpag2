@@ -62,12 +62,6 @@ void setRAMBank(u8 bankIndex) {
     ramBankIndex = bankIndex;
 }
 
-void runCpu() {
-    while(registers[PROGRAM_COUNTER_REGISTER] < RAM_TOTAL_SIZE - 8) {
-        runInstruction();
-    }
-}
-
 u16 pop() {
     registers[STACK_POINTER_REGISTER] -= 2;
     return readWord(registers[STACK_POINTER_REGISTER]);
