@@ -1,0 +1,35 @@
+# C++ Makefile (GCC)
+# automatically compiles & links all .cpp files in current directory (and subdirectories)
+
+# Compiler
+CC = g++
+
+# Compiler flags
+CFLAGS = -std=c++23 -Wall -Wextra -Werror -Wfatal-errors -pedantic-errors -Wno-unused-variable -Wno-unused-but-set-variable
+
+# Linker flags
+LFLAGS = -std=c++23 -Wall -Wextra -Werror -Wfatal-errors -pedantic-errors
+
+# Executable name
+EXEC = lowSpag2VM
+
+# Source files
+SRCS = $(wildcard *.cpp) $(wildcard */*.cpp)
+
+# Object files
+OBJS = $(SRCS:.cpp=.o)
+
+# Default target
+all: $(EXEC)
+
+# Compile
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Link
+$(EXEC): $(OBJS)
+	$(CC) $(LFLAGS) $^ -o $@
+
+# Clean
+clean:
+	rm -f $(OBJS) $(EXEC)
