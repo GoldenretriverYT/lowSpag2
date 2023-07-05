@@ -3,6 +3,14 @@
 #include "num.h"
 #include "ram.h"
 
+#ifdef __GNUC__
+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
+#endif
+
+#ifdef _MSC_VER
+#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#endif
+
 #define STACK_SIZE 1024
 #define STACK_START RAM_TOTAL_SIZE - STACK_SIZE
 
@@ -19,10 +27,10 @@
 #define CPU_FLAG_INTERRUPTS_ENABLED 0
 #define CPU_FLAG_USER_MODE_OUTSIDE_CANREAD 1
 
-struct CpuState {
+PACK(struct CpuState {
     u8 isInPrivilegedMode:1;
     u8 reserved:7;
-}__attribute((packed));
+});
 
 struct InterruptInfo {
     u16 mappings[256];
